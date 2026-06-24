@@ -6,7 +6,7 @@
 
 ## Ссылки
 
-Превью: `добавить ссылку на Vercel / Netlify`
+Превью: [Ссылка на Vercel](https://booking-table-iota.vercel.app/)
 
 ## Стек
 

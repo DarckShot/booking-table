@@ -35,13 +35,13 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       <body className="min-h-full bg-background font-sans text-foreground">
         <div className="min-h-screen bg-[linear-gradient(180deg,#FAFAF8_0%,#F5F0E8_100%)]">
           <header className="border-b border-border/70 bg-background/85 backdrop-blur">
-            <div className="mx-auto w-full max-w-6xl px-5 py-4 sm:px-8 lg:px-12">
-              <p className="text-lg font-semibold tracking-[-0.04em]">SAVEUR</p>
-              <p className="mt-0.5 text-xs text-muted">Restaurant booking</p>
+            <div className="mx-auto w-full max-w-6xl px-5 py-3 sm:px-8 lg:px-12">
+              <p className="text-2xl font-semibold tracking-[-0.04em]">SAVEUR</p>
+              <p className="mt-0.5 text-sm text-muted">Restaurant booking</p>
             </div>
           </header>
 
-          <main className="mx-auto w-full max-w-6xl px-5 py-8 sm:px-8 sm:py-10 lg:px-12">
+          <main className="mx-auto w-full max-w-6xl px-5 py-5 sm:px-8 sm:py-6 lg:px-12 lg:py-6">
             {children}
           </main>
         </div>

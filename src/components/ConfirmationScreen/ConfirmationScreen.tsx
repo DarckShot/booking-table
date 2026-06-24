@@ -1,4 +1,5 @@
 import { Button } from '@/shared/ui/Button';
+import { CheckIcon } from '@/shared/icons/CheckIcon';
 import { getBookingDetails } from './utils';
 import { BookingFormData } from '@/types/booking';
 
@@ -12,8 +13,8 @@ const ConfirmationScreen = ({ bookingData, onReset }: ConfirmationScreenProps) =
 
   return (
     <div className="flex min-h-[520px] flex-col justify-center">
-      <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-accent/15 text-3xl font-semibold text-accent">
-        ✓
+      <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-accent/15 text-accent">
+        <CheckIcon className="size-8" />
       </div>
 
       <div className="mt-6 text-center">

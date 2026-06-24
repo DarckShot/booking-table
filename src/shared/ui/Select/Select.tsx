@@ -34,10 +34,18 @@ export const Select = ({
 
   const selectedOption = options.find((option) => option.value === value);
 
-  const { containerRef, isOpen, handleOptionSelect, handleToggle } = useSelect({
+  const {
+    containerRef,
+    highlightedIndex,
+    isOpen,
+    handleKeyDown,
+    handleOptionSelect,
+    handleToggle,
+  } = useSelect({
     disabled,
     onBlur,
     onChange,
+    options,
   });
 
   return (
@@ -47,11 +55,11 @@ export const Select = ({
         aria-describedby={errorId}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        aria-invalid={error}
-        className={getButtonClassName(error)}
+        className={getButtonClassName({ error })}
         disabled={disabled}
         id={id}
         onClick={handleToggle}
+        onKeyDown={handleKeyDown}
         type="button"
       >
         <span className={selectedOption ? 'text-foreground' : 'text-muted/65'}>
@@ -72,8 +80,9 @@ export const Select = ({
           id={listboxId}
           role="listbox"
         >
-          {options.map((option) => (
+          {options.map((option, index) => (
             <SelectOptionButton
+              isHighlighted={index === highlightedIndex}
               isSelected={option.value === value}
               key={option.value}
               option={option}

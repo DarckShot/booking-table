@@ -59,7 +59,6 @@ export const DatePicker = ({
         aria-controls={dialogId}
         aria-describedby={errorId}
         aria-expanded={isOpen}
-        aria-invalid={error}
         className={getButtonClassName(error)}
         disabled={disabled}
         id={id}

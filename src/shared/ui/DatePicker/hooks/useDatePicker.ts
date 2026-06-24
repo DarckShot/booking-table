@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useClickOutside } from '@/shared/hooks';
 import type { CalendarDay } from './../types';
 import { getCalendarDays, getDateFromValue, getInitialMonth } from './../utils';
 
@@ -19,7 +20,6 @@ export const useDatePicker = ({
   onBlur,
   onChange,
 }: UseDatePickerParams) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(() => getInitialMonth(value, min));
 
@@ -31,6 +31,8 @@ export const useDatePicker = ({
     setIsOpen(false);
     onBlur?.();
   };
+
+  const containerRef = useClickOutside({ onClose: handleClose, disabled: !isOpen });
 
   const handleToggle = () => {
     if (disabled) {
@@ -57,39 +59,11 @@ export const useDatePicker = ({
     handleClose();
   };
 
-  useEffect(() => {
-    if (!value) {
-      return;
-    }
+  const selectedDate = useMemo(() => getDateFromValue(value), [value]);
 
-    const selectedDate = getDateFromValue(value);
-
-    if (selectedDate) {
-      setCurrentMonth(selectedDate);
-    }
-  }, [value]);
-
-  useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) {
-        handleClose();
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        handleClose();
-      }
-    };
-
-    document.addEventListener('pointerdown', handlePointerDown);
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('pointerdown', handlePointerDown);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+  if (selectedDate && selectedDate.getTime() !== currentMonth.getTime()) {
+    setCurrentMonth(selectedDate);
+  }
 
   return {
     calendarDays,
